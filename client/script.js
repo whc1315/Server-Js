@@ -92,7 +92,13 @@ const ohMy = () => {
   axios
     .get("http://localhost:3000/animals")
     .then((res) => {
-      console.log(res.data);
+      for (let i = 0; i < res.data.length; i++) {
+        const body = document.querySelector("body");
+        const newPara = document.createElement("p");
+
+        newPara.textContent = res.data[i];
+        body.appendChild(newPara);
+      }
     })
     .catch((err) => console.log(err));
 };
