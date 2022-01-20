@@ -12,6 +12,8 @@
 // CODE HERE
 
 let sayHelloButton = document.querySelector("#say-hello-button");
+let repeatMyParamButton = document.querySelector("#repeat-button");
+let queryButton = document.querySelector("#query-button");
 
 // PROBLEM 2
 /*
@@ -87,7 +89,12 @@ sayHelloButton.addEventListener("click", sayHello);
 */
 
 const ohMy = () => {
-  // YOUR CODE HERE
+  axios
+    .get("http://localhost:3000/animals")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
 };
 
 document.getElementById("animals-button").addEventListener("click", ohMy);
@@ -106,8 +113,19 @@ document.getElementById("animals-button").addEventListener("click", ohMy);
 */
 
 const repeatMyParam = () => {
-  //YOUR CODE HERE
+  axios
+    .get("http://localhost:3000/repeat/" + "BigWilly")
+    .then((res) => {
+      console.log(res.data);
+      let repeatText = document.querySelector("#repeat-text");
+      repeatText.style.display = "block";
+      repeatText.style.backgroundColor = "yellow";
+      repeatText.textContent = res.data;
+    })
+    .catch((err) => console.log(err));
 };
+
+repeatMyParamButton.addEventListener("click", repeatMyParam);
 
 // PROBLEM 7
 /*
@@ -128,6 +146,17 @@ const repeatMyParam = () => {
 */
 
 // CODE HERE
+
+function getQuery() {
+  axios
+    .get("http://localhost:3000/query-test/?chicken=fried")
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => console.log(err));
+}
+
+queryButton.addEventListener("click", getQuery);
 
 ////////////////
 //INTERMEDIATE//
