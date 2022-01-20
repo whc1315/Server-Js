@@ -48,6 +48,11 @@ sayHelloButton.addEventListener("mouseover", () => {
 
 // CODE HERE
 
+sayHelloButton.addEventListener("mouseout", () => {
+  sayHelloButton.style.backgroundColor = "#EFEFEF";
+  sayHelloButton.style.color = "black";
+});
+
 // PROBLEM 4
 /*
     Now lets see if we can make a request to our server when we click the button
@@ -67,6 +72,8 @@ const sayHello = () => {
 // DO NOT EDIT FUNCTION
 
 // CODE HERE
+
+sayHelloButton.addEventListener("click", sayHello);
 
 // PROBLEM 5
 /*
