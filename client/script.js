@@ -14,6 +14,7 @@
 let sayHelloButton = document.querySelector("#say-hello-button");
 let repeatMyParamButton = document.querySelector("#repeat-button");
 let queryButton = document.querySelector("#query-button");
+// let submitButton = document.querySelector("#submit-button");
 
 // PROBLEM 2
 /*
@@ -155,7 +156,7 @@ repeatMyParamButton.addEventListener("click", repeatMyParam);
 
 function getQuery() {
   axios
-    .get("http://localhost:3000/query-test/?chicken=fried")
+    .get("http://localhost:3000/query-test/?chicken=fried&dog=mastiff")
     .then((res) => {
       console.log(res.data);
     })
@@ -182,9 +183,9 @@ queryButton.addEventListener("click", getQuery);
     In the function that you wrote for Problem 8, change the URL to test a couple different scenarios. 
 
     1: Send no queries on the URL -- what happened? 
-
+//Says you sent no query.
     2: Send more than 1 query on the URL -- what happened? 
-*/
+*/ //Said i sent more than one query.
 
 // Edit code in Problem 8
 
@@ -212,3 +213,33 @@ queryButton.addEventListener("click", getQuery);
 */
 
 // CODE HERE
+
+function createFood() {
+  let foodInput = document.querySelector("#add-food");
+
+  let body = {
+    newFood: foodInput.value,
+  };
+
+  axios
+    .post("http://localhost:3000/food", body)
+    .then(function (res) {
+      console.log(res.data);
+
+      const foodList = document.querySelector("section");
+
+      foodList.innerHTML = "";
+
+      res.data.forEach((foodStr) => {
+        const newP = document.createElement("p");
+        newP.textContent = foodStr;
+        // foodInput.style.display = "block";
+        // foodInput.style.backgroundColor = "red";
+        // foodInput.textContent = res.data;
+        foodList.appendChild(newP);
+      });
+    })
+    .catch((err) => console.log(err));
+}
+
+document.querySelector("form").addEventListener("submit", createFood);
